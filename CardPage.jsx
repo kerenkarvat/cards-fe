@@ -66,19 +66,59 @@ function CardPage() {
         alignItems: 'center',
         justifyContent: 'center',
         fontFamily: 'Quicksand, Comic Sans MS, sans-serif',
+        position: 'relative',
+        overflow: 'hidden',
       }}
     >
+      {/* Decorative confetti and sparkles */}
+      <div style={{
+        position: 'absolute',
+        inset: 0,
+        pointerEvents: 'none',
+        zIndex: 0,
+      }}>
+        {/* Confetti dots */}
+        {[...Array(18)].map((_, i) => (
+          <div key={i} style={{
+            position: 'absolute',
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+            width: `${8 + Math.random() * 8}px`,
+            height: `${8 + Math.random() * 8}px`,
+            borderRadius: '50%',
+            background: [
+              '#fffbe7', '#ffe0f7', '#d1eaff', '#f7e6ff', '#ffe6e6', '#e0ffd1', '#f7f3ff', '#f9e6ff', '#e6f7ff'
+            ][i % 9],
+            opacity: 0.7,
+            filter: 'blur(0.5px)',
+          }} />
+        ))}
+        {/* Sparkles */}
+        {[...Array(8)].map((_, i) => (
+          <div key={'sparkle'+i} style={{
+            position: 'absolute',
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+            fontSize: `${18 + Math.random() * 16}px`,
+            opacity: 0.6,
+            color: ['#fff', '#ffe0f7', '#f7e6ff', '#fffbe7'][i % 4],
+            pointerEvents: 'none',
+            userSelect: 'none',
+          }}>
+            ✨
+          </div>
+        ))}
+      </div>
       <div
         style={{
-          background: 'rgba(255,255,255,0.97)',
-          borderRadius: 24,
-          boxShadow: '0 8px 32px 0 rgba(109, 91, 186, 0.18)',
-          padding: '2.5rem 2rem',
-          maxWidth: 420,
+          background: '#fff',
+          borderRadius: 28,
+          boxShadow: '0 8px 32px 0 rgba(109, 91, 186, 0.10)',
+          padding: '3rem 2.5rem',
+          maxWidth: 600,
           width: '100%',
-          minHeight: 400,
+          minHeight: 520,
           textAlign: 'center',
-          border: '2px solid #a18cd1',
           position: 'relative',
           display: 'flex',
           flexDirection: 'column',
@@ -95,14 +135,15 @@ function CardPage() {
                 src={pages[page].content}
                 alt="Greeting Card"
                 style={{
-                  maxWidth: '100%',
-                  maxHeight: 320,
-                  borderRadius: 16,
-                  boxShadow: '0 2px 8px #6d5bba33',
-                  border: '2px solid #a18cd1',
-                  background: '#fff',
+                  maxWidth: '90%',
+                  maxHeight: 420,
+                  borderRadius: 20,
+                  boxShadow: '0 2px 12px #a18cd122',
+                  background: 'rgba(255,255,255,0.95)',
                   margin: '0 auto',
                   display: 'block',
+                  zIndex: 2,
+                  position: 'relative',
                 }}
               />
             )}
@@ -111,8 +152,8 @@ function CardPage() {
                 style={{
                   position: 'relative',
                   width: '100%',
-                  minHeight: 180,
-                  margin: '1.5rem 0',
+                  minHeight: 320,
+                  margin: '2.5rem 0',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -121,17 +162,16 @@ function CardPage() {
               >
                 <div
                   style={{
-                    background: '#f7f3ff',
-                    border: '2px solid #a18cd1',
-                    borderRadius: '12px 32px 32px 12px',
-                    boxShadow: '0 4px 24px #a18cd122, 8px 0 16px -8px #a18cd144',
+                    background: '#fff',
+                    borderRadius: 18,
+                    boxShadow: '0 4px 16px #a18cd122',
                     width: '100%',
-                    minHeight: 180,
-                    padding: '1.2rem',
+                    minHeight: 320,
+                    padding: '2.2rem',
                     fontFamily: 'Quicksand, Comic Sans MS, sans-serif',
                     fontWeight: 600,
                     color: '#6d5bba',
-                    fontSize: 20,
+                    fontSize: 26,
                     position: 'relative',
                     transition: 'box-shadow 0.2s',
                     overflow: 'hidden',
@@ -146,8 +186,8 @@ function CardPage() {
                     placeholder="Write your message here..."
                     style={{
                       width: '100%',
-                      minHeight: 120,
-                      fontSize: 20,
+                      minHeight: 220,
+                      fontSize: 26,
                       color: '#6d5bba',
                       padding: 0,
                       border: 'none',
@@ -164,11 +204,11 @@ function CardPage() {
                       position: 'absolute',
                       right: 0,
                       bottom: 0,
-                      width: 40,
-                      height: 40,
+                      width: 60,
+                      height: 60,
                       background: 'radial-gradient(circle at 100% 100%, #e0d6f7 0%, #f7f3ff 80%)',
-                      borderTopLeftRadius: 40,
-                      boxShadow: '-4px 4px 12px #a18cd122',
+                      borderTopLeftRadius: 60,
+                      boxShadow: '-8px 8px 24px #a18cd122',
                       zIndex: 2,
                     }}
                   />
