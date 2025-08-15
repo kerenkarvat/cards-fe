@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import CupcakeBackground from './CupcakeBackground';
 import CardForm from './CardForm';
 import ResponseMessage from './ResponseMessage';
+import GeneratedImage from './GeneratedImage';
 
 function App() {
   const [text, setText] = useState('');
   const [response, setResponse] = useState('');
+  const [imageUrl, setImageUrl] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -14,15 +16,25 @@ function App() {
     setLoading(true);
     setError('');
     setResponse('');
+    setImageUrl(null);
     try {
-      const res = await fetch('https://example.com/api', {
+      const res = await fetch('http://localhost:3000/images', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text }),
       });
       if (!res.ok) throw new Error('API error');
-      const data = await res.json();
-      setResponse(JSON.stringify(data));
+      const contentType = res.headers.get('content-type');
+      if (contentType && contentType.startsWith('image/')) {
+        const blob = await res.blob();
+        const url = URL.createObjectURL(blob);
+        setImageUrl(url);
+        setResponse('');
+      } else {
+        const data = await res.json();
+        setResponse(JSON.stringify(data));
+        setImageUrl(null);
+      }
     } catch (err) {
       setError(err.message);
     } finally {
@@ -79,6 +91,7 @@ function App() {
           handleSubmit={handleSubmit}
         />
         <ResponseMessage response={response} error={error} />
+        <GeneratedImage imageUrl={imageUrl} />
       </div>
     </div>
   );
