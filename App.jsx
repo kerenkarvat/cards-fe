@@ -8,6 +8,7 @@ function App() {
   const [text, setText] = useState('');
   const [response, setResponse] = useState('');
   const [imageUrl, setImageUrl] = useState(null);
+  const [cardId, setCardId] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -17,6 +18,7 @@ function App() {
     setError('');
     setResponse('');
     setImageUrl(null);
+    setCardId(null);
     try {
       const res = await fetch('http://localhost:3000/images', {
         method: 'POST',
@@ -34,6 +36,9 @@ function App() {
         const data = await res.json();
         setResponse(JSON.stringify(data));
         setImageUrl(null);
+        if (data.id) {
+          setCardId(data.id);
+        }
       }
     } catch (err) {
       setError(err.message);
@@ -92,6 +97,18 @@ function App() {
         />
         <ResponseMessage response={response} error={error} />
         <GeneratedImage imageUrl={imageUrl} />
+        {cardId && (
+          <div style={{ marginTop: 16 }}>
+            <a
+              href={`/card/${cardId}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: '#6d5bba', textDecoration: 'underline' }}
+            >
+              View your greeting card
+            </a>
+          </div>
+        )}
       </div>
     </div>
   );
