@@ -1,58 +1,90 @@
 import React from 'react';
 
 function CupcakeBackground() {
-  // Responsive grid: number of columns/rows adapts to screen size using CSS Grid
-  // Cupcake and glitter size adapts with vw/vh units
-  const rows = 6;
-  const cols = 6;
-  const gridItems = [];
-  for (let i = 0; i < rows * cols; i++) {
-    // Alternate between cupcake and glitter
-    const isCupcake = (i + Math.floor(i / cols)) % 2 === 0;
-    const emoji = isCupcake ? '🧁' : '✨';
-    // Add a little more opacity to glitter
-    const opacity = isCupcake ? 0.7 : 0.5 + 0.2 * Math.random();
-    // Add a little size variation for glitter
-    const fontSize = isCupcake ? 'min(7vw, 7vh)' : `min(${5 + Math.random() * 3}vw, ${5 + Math.random() * 3}vh)`;
-    gridItems.push(
-      <span
-        key={i}
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize,
-          opacity,
-          userSelect: 'none',
-          filter: isCupcake ? 'drop-shadow(0 4px 12px #6d5bba33)' : 'drop-shadow(0 0 12px #fff7)',
-          pointerEvents: 'none',
-          width: '100%',
-          height: '100%',
-          transition: 'opacity 0.3s',
-        }}
-      >
-        {emoji}
-      </span>
-    );
-  }
-  return (
-    <div
+  // MagicCards style: elegant magical icons with subtle presence
+  const decorativeElements = [
+    // Cupcake elements
+    { emoji: '🧁', x: '10%', y: '20%', size: '1.2rem', opacity: 0.3 },
+    { emoji: '✨', x: '85%', y: '75%', size: '1.2rem', opacity: 0.3 },
+    { emoji: '🧁', x: '50%', y: '10%', size: '1.5rem', opacity: 0.3 },
+    { emoji: '🍰', x: '30%', y: '80%', size: '1.3rem', opacity: 0.3 },
+    { emoji: '🍰', x: '70%', y: '20%', size: '1.4rem', opacity: 0.3 },
+
+    // Magic Wands
+    { emoji: '🪄', x: '75%', y: '10%', size: '1.3rem', opacity: 0.3 },
+    { emoji: '🪄', x: '5%', y: '50%', size: '1.1rem', opacity: 0.3 },
+
+    // Celebration
+    { emoji: '🎉', x: '85%', y: '40%', size: '1.1rem', opacity: 0.3 },
+    { emoji: '🎊', x: '12%', y: '35%', size: '0.9rem', opacity: 0.3 },
+    { emoji: '🎈', x: '20%', y: '70%', size: '1.2rem', opacity: 0.3 },
+
+    // Gifts
+    { emoji: '🎁', x: '80%', y: '90%', size: '1.2rem', opacity: 0.3 },
+    { emoji: '🎁', x: '8%', y: '15%', size: '1rem', opacity: 0.3 },
+
+    // Sparkles and Stars
+    { emoji: '✨', x: '25%', y: '15%', size: '1rem', opacity: 0.3 },
+    { emoji: '🌟', x: '75%', y: '25%', size: '0.8rem', opacity: 0.3 },
+    { emoji: '💫', x: '80%', y: '60%', size: '1rem', opacity: 0.3 },
+    { emoji: '⭐', x: '20%', y: '65%', size: '0.9rem', opacity: 0.3 },
+    { emoji: '🎭', x: '90%', y: '40%', size: '0.8rem', opacity: 0.3 },
+    { emoji: '🎨', x: '30%', y: '85%', size: '0.9rem', opacity: 0.3 },
+    { emoji: '🎪', x: '60%', y: '5%', size: '1.1rem', opacity: 0.3 },
+    { emoji: '🎉', x: '45%', y: '90%', size: '0.8rem', opacity: 0.3 },
+  ];
+
+  const gridItems = decorativeElements.map((element, i) => (
+    <span
+      key={i}
       style={{
         position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100vw',
-        height: '100vh',
-        zIndex: 0,
+        left: element.x,
+        top: element.y,
+        fontSize: element.size,
+        opacity: element.opacity,
+        userSelect: 'none',
+        filter: 'drop-shadow(0 0 6px rgba(255, 255, 255, 0.1))',
         pointerEvents: 'none',
-        display: 'grid',
-        gridTemplateColumns: `repeat(${cols}, 1fr)`,
-        gridTemplateRows: `repeat(${rows}, 1fr)`,
-        gap: '0',
+        transition: 'opacity 0.8s ease-in-out',
+        transform: 'translateZ(0)', // Hardware acceleration
       }}
     >
-      {gridItems}
-    </div>
+      {element.emoji}
+    </span>
+  ));
+
+  return (
+    <>
+      {/* Radial gradient overlay for depth */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100vw',
+          height: '100vh',
+          background: 'radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 70%)',
+          zIndex: 0,
+          pointerEvents: 'none',
+        }}
+      />
+
+      {/* Strategically placed decorative elements */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100vw',
+          height: '100vh',
+          zIndex: 0,
+          pointerEvents: 'none',
+        }}
+      >
+        {gridItems}
+      </div>
+    </>
   );
 }
 

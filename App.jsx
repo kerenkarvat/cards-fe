@@ -3,6 +3,7 @@ import CupcakeBackground from './CupcakeBackground';
 import CardForm from './CardForm';
 import ResponseMessage from './ResponseMessage';
 import GeneratedImage from './GeneratedImage';
+import styles from './src/styles/App.module.css';
 
 function App() {
   const [text, setText] = useState('');
@@ -48,45 +49,50 @@ function App() {
   };
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      width: '100vw',
-      overflow: 'hidden',
-      position: 'relative',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      background: 'linear-gradient(135deg, #a18cd1 0%, #6d5bba 100%)',
-      fontFamily: 'Quicksand, Comic Sans MS, sans-serif',
-      transition: 'background 0.5s',
-    }}>
+    <div className={styles.container}>
+      <div className={styles.brandBar}>
+        <div className={styles.logo}>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 256" width="240" height="52" role="img" aria-labelledby="title desc">
+            <title id="title">MagicCards logo</title>
+            <desc id="desc">Rounded gradient tile with a magic wand and sparkle emoji ✨, plus the MagicCards wordmark.</desc>
+
+            <defs>
+              <linearGradient id="gc" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%"  stopColor="#D7A7FF"/>
+                <stop offset="50%" stopColor="#A177FF"/>
+                <stop offset="100%" stopColor="#6C63FF"/>
+              </linearGradient>
+            </defs>
+
+            {/* ICON */}
+            <g>
+              <rect x="32" y="32" width="192" height="192" rx="44" fill="url(#gc)"/>
+
+              {/* wand */}
+              <g transform="translate(92,156) rotate(-35)">
+                <rect x="0" y="-7" width="108" height="14" rx="7" fill="#3B2D6E"/>
+                <rect x="0" y="-7" width="48" height="14" rx="7" fill="#FFFFFF"/>
+                <circle cx="108" cy="0" r="9"  fill="#FFFFFF"/>
+              </g>
+
+              {/* sparkle emoji */}
+              <text x="180" y="90" fontSize="32">✨</text>
+              <text x="160" y="65" fontSize="24">✨</text>
+              <text x="170" y="125" fontSize="20">✨</text>
+            </g>
+
+            {/* WORDMARK */}
+            <text x="260" y="180"
+                  fontFamily="'Nunito', 'Comfortaa', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+                  fontSize="150" fontWeight="500" letterSpacing=".5" fill="#6f76a7">
+              MagicCards
+            </text>
+          </svg>
+        </div>
+      </div>
       <CupcakeBackground />
-      <div style={{
-        background: 'rgba(245,245,255,0.96)',
-        borderRadius: 24,
-        boxShadow: '0 8px 32px 0 rgba(109, 91, 186, 0.18)',
-        padding: '2.5rem 2rem',
-        maxWidth: 420,
-        width: '100%',
-        margin: '0 auto',
-        textAlign: 'center',
-        border: '2px solid #a18cd1',
-        zIndex: 1,
-        position: 'relative',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}>
-        <h1 style={{
-          fontSize: '2.2rem',
-          fontWeight: 800,
-          marginBottom: 16,
-          color: '#6d5bba',
-          letterSpacing: 1,
-          textShadow: '0 2px 8px #a18cd155',
-        }}>
+      <div className={styles.card}>
+        <h1 className={styles.title}>
           Create your magical card
         </h1>
         <CardForm
@@ -98,16 +104,15 @@ function App() {
         <ResponseMessage response={response} error={error} />
         <GeneratedImage imageUrl={imageUrl} />
         {cardId && (
-          <div style={{ marginTop: 16 }}>
-            <a
-              href={`/card/${cardId}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: '#6d5bba', textDecoration: 'underline' }}
-            >
-              View your greeting card
-            </a>
-          </div>
+          <a
+            href={`/card/${cardId}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.cardLink}
+          >
+            <span>View your greeting card</span>
+            <span>→</span>
+          </a>
         )}
       </div>
     </div>

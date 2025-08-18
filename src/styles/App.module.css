@@ -1,0 +1,135 @@
+.container {
+  min-height: 100vh;
+  width: 100vw;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+  overflow: hidden;
+}
+
+.brandBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 10;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo svg {
+  height: 70px;
+  width: auto;
+  max-width: 240px;
+}
+
+.card {
+  background: var(--gradient-glass);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  box-shadow: var(--shadow-card);
+  padding: var(--space-10) var(--space-8);
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 1;
+  position: relative;
+  transition: transform var(--transition-base);
+}
+
+
+.title {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-8);
+  color: var(--color-text-primary);
+  letter-spacing: -0.25px;
+  line-height: 1.3;
+}
+
+.cardLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, rgba(234, 231, 250, 0.1), rgba(160, 183, 226, 0.1));
+  color: white;
+  text-decoration: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  transition: all var(--transition-base);
+  border: 1px solid rgba(234, 231, 250, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.cardLink:hover {
+  background: linear-gradient(135deg, rgba(234, 231, 250, 0.2), rgba(160, 183, 226, 0.2));
+  transform: translateY(-1px);
+  border-color: rgba(234, 231, 250, 0.5);
+}
+
+.cardLink:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .container {
+    padding: var(--space-4);
+  }
+
+  .card {
+    padding: var(--space-8) var(--space-6);
+    max-width: 100%;
+  }
+
+  .title {
+    font-size: var(--font-size-3xl);
+  }
+
+  .brandBar {
+    height: 50px;
+  }
+
+  .brandText {
+    font-size: var(--font-size-base);
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: var(--space-6) var(--space-5);
+    border-radius: var(--radius-2xl);
+  }
+
+  .title {
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--space-5);
+  }
+}
+
+/* Enhanced animations for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    animation: fadeIn var(--transition-base) ease-out;
+  }
+}
