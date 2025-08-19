@@ -6,6 +6,9 @@ import GeneratedImage from './GeneratedImage';
 
 function App() {
   const [text, setText] = useState('');
+  const [occasion, setOccasion] = useState('');
+  const [recipientInfo, setRecipientInfo] = useState('');
+  const [mood, setMood] = useState('');
   const [response, setResponse] = useState('');
   const [imageUrl, setImageUrl] = useState(null);
   const [cardId, setCardId] = useState(null);
@@ -23,7 +26,7 @@ function App() {
       const res = await fetch('http://localhost:3000/images', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text }),
+        body: JSON.stringify({ text, occasion, recipientInfo, mood }),
       });
       if (!res.ok) throw new Error('API error');
       const contentType = res.headers.get('content-type');
@@ -92,6 +95,12 @@ function App() {
         <CardForm
           text={text}
           setText={setText}
+          occasion={occasion}
+          setOccasion={setOccasion}
+          recipientInfo={recipientInfo}
+          setRecipientInfo={setRecipientInfo}
+          mood={mood}
+          setMood={setMood}
           loading={loading}
           handleSubmit={handleSubmit}
         />
