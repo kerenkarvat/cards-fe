@@ -9,6 +9,7 @@ function App() {
   const [occasion, setOccasion] = useState('');
   const [recipientInfo, setRecipientInfo] = useState('');
   const [mood, setMood] = useState('');
+  const [designRequest, setDesignRequest] = useState('');
   const [response, setResponse] = useState('');
   const [imageUrl, setImageUrl] = useState(null);
   const [cardId, setCardId] = useState(null);
@@ -26,7 +27,7 @@ function App() {
       const res = await fetch('http://localhost:3000/images', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text, occasion, recipientInfo, mood }),
+        body: JSON.stringify({ text, occasion, recipientInfo, mood, designRequest }),
       });
       if (!res.ok) throw new Error('API error');
       const contentType = res.headers.get('content-type');
@@ -101,6 +102,8 @@ function App() {
           setRecipientInfo={setRecipientInfo}
           mood={mood}
           setMood={setMood}
+          designRequest={designRequest}
+          setDesignRequest={setDesignRequest}
           loading={loading}
           handleSubmit={handleSubmit}
         />

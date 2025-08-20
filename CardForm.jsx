@@ -1,6 +1,6 @@
 import React from 'react';
 
-function CardForm({ occasion, setOccasion, recipientInfo, setRecipientInfo, mood, setMood, loading, handleSubmit }) {
+function CardForm({ occasion, setOccasion, recipientInfo, setRecipientInfo, mood, setMood, designRequest, setDesignRequest, loading, handleSubmit }) {
   const inputStyle = {
     width: '100%',
     padding: '1.2rem',
@@ -25,7 +25,7 @@ function CardForm({ occasion, setOccasion, recipientInfo, setRecipientInfo, mood
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+  <form onSubmit={handleSubmit}>
       <label style={labelStyle}>
         What's the occasion?
       </label>
@@ -58,7 +58,7 @@ function CardForm({ occasion, setOccasion, recipientInfo, setRecipientInfo, mood
       />
 
       <label style={labelStyle}>
-        What kind of mood should the card have?
+        What kind of mood or theme should the card have?
       </label>
       <input
         type="text"
@@ -70,6 +70,20 @@ function CardForm({ occasion, setOccasion, recipientInfo, setRecipientInfo, mood
         }}
         maxLength={100}
         required
+      />
+      <label style={labelStyle}>
+        Free text to add requests for card design
+      </label>
+      <textarea
+        value={designRequest}
+        onChange={e => setDesignRequest(e.target.value)}
+        style={{
+          ...inputStyle,
+          height: '80px',
+          resize: 'vertical',
+        }}
+        placeholder="Any special requests for the card's design? Colors, style, etc. (optional)"
+        maxLength={300}
       />
       <button
         type="submit"
