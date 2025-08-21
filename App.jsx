@@ -24,7 +24,8 @@ function App() {
     setImageUrl(null);
     setCardId(null);
     try {
-      const res = await fetch('http://localhost:3000/images', {
+  const apiUrl = import.meta.env.VITE_API_URL || '';
+  const res = await fetch(`${apiUrl}/images`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text, occasion, recipientInfo, mood, designRequest }),

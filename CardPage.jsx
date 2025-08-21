@@ -28,7 +28,8 @@ function CardPage() {
         setLoading(true);
         setError('');
         setImageUrl(null);
-        const res = await fetch(`http://localhost:3000/images/${id}`);
+  const apiUrl = import.meta.env.VITE_API_URL || '';
+  const res = await fetch(`${apiUrl}/images/${id}`);
         if (!res.ok) throw new Error('Image not found');
         const blob = await res.blob();
         const url = URL.createObjectURL(blob);
