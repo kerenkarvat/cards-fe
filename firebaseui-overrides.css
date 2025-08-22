@@ -1,0 +1,49 @@
+.firebaseui-idp-text-short {
+  display: none !important;
+}
+.firebaseui-container, .firebaseui-card-content {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+}
+
+.firebaseui-idp-button {
+  min-width: 220px;
+  width: 100%;
+  max-width: 320px;
+  margin: 0.5rem 0 !important;
+  border-radius: 8px !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  box-shadow: 0 2px 8px #a18cd133 !important;
+  height: 44px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.firebaseui-idp-list {
+  width: 100%;
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  list-style: none !important;
+  padding-left: 0 !important;
+}
+
+.firebaseui-idp-text {
+  flex: 1;
+  text-align: center;
+}
+
+.firebaseui-idp-icon {
+  width: 22px !important;
+  height: 22px !important;
+  margin-right: 12px !important;
+  object-fit: contain !important;
+}
+
+.firebaseui-title, .firebaseui-subtitle, .firebaseui-text {
+  text-align: center !important;
+}
