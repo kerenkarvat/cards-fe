@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@vitejs/plugin-react": "^4.7.0",
+    "firebase": "^10.12.2",
+    "firebaseui": "^6.1.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.8.0"

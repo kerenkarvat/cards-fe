@@ -185,6 +185,8 @@ function App() {
             padding: '2.5rem 2rem',
             maxWidth: 420,
             width: '100%',
+            height: 540,
+            minHeight: 540,
             margin: '0 auto',
             textAlign: 'center',
             border: '2px solid #a18cd1',
@@ -194,47 +196,65 @@ function App() {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
+            transition: 'height 0.2s',
+            overflow: 'hidden',
           }}
         >
-          <h1
-            style={{
-              fontSize: '2.2rem',
-              fontWeight: 800,
-              marginBottom: 16,
-              color: '#6d5bba',
-              letterSpacing: 1,
-              textShadow: '0 2px 8px #a18cd155',
-            }}
-          >
-            Create your magical card
-          </h1>
-          <CardForm
-            text={text}
-            setText={setText}
-            occasion={occasion}
-            setOccasion={setOccasion}
-            recipientInfo={recipientInfo}
-            setRecipientInfo={setRecipientInfo}
-            mood={mood}
-            setMood={setMood}
-            designRequest={designRequest}
-            setDesignRequest={setDesignRequest}
-            loading={loading}
-            handleSubmit={handleSubmit}
-          />
-          <ResponseMessage response={response} error={error} />
-          <GeneratedImage imageUrl={imageUrl} />
-          {cardId && (
-            <div style={{ marginTop: 16 }}>
-              <a
-                href={`/card/${cardId}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: '#6d5bba', textDecoration: 'underline' }}
-              >
-                View your greeting card
-              </a>
+          {/* Show wizard only if not loading and no response yet */}
+          {(!loading && !response && !imageUrl && !cardId) && (
+            <CardForm
+              text={text}
+              setText={setText}
+              occasion={occasion}
+              setOccasion={setOccasion}
+              recipientInfo={recipientInfo}
+              setRecipientInfo={setRecipientInfo}
+              mood={mood}
+              setMood={setMood}
+              designRequest={designRequest}
+              setDesignRequest={setDesignRequest}
+              loading={loading}
+              handleSubmit={handleSubmit}
+            />
+          )}
+          {/* Show loader when loading */}
+          {loading && (
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: 200 }}>
+              <div className="loader" style={{
+                border: '6px solid #ede7fa',
+                borderTop: '6px solid #6d5bba',
+                borderRadius: '50%',
+                width: 48,
+                height: 48,
+                animation: 'spin 1s linear infinite',
+                marginBottom: 18
+              }} />
+              <div style={{ color: '#6d5bba', fontWeight: 700, fontSize: '1.1rem' }}>Sending your magic...</div>
+              <style>{`@keyframes spin { 0% { transform: rotate(0deg);} 100% { transform: rotate(360deg);} }`}</style>
             </div>
+          )}
+          {/* Show response and card after loading is done */}
+          {(!loading && (response || imageUrl || cardId)) && (
+            <>
+              <ResponseMessage response={response} error={error} />
+              {imageUrl && (
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 8 }}>
+                  <img src={imageUrl} alt="Generated card preview" style={{ width: 120, height: 80, objectFit: 'cover', borderRadius: 10, border: '1.5px solid #a18cd1', marginBottom: 10, boxShadow: '0 2px 8px #a18cd133' }} />
+                </div>
+              )}
+              {cardId && (
+                <div style={{ marginTop: 8 }}>
+                  <a
+                    href={`/card/${cardId}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: '#6d5bba', textDecoration: 'underline' }}
+                  >
+                    View your greeting card
+                  </a>
+                </div>
+              )}
+            </>
           )}
         </div>
     
